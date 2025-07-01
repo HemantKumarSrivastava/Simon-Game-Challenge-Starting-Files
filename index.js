@@ -12,9 +12,10 @@ var started = false;
 var level = 0;
 
 $(document).keypress(function () {
-  if (level === 0) {
+  if (!started) {
     $("#level-title").text("level " + level);
     nextSequence();
+    started = true;
   }
 });
 
@@ -27,6 +28,8 @@ $(".btn").click(function () {
   playAudio(userChoosenColor);
   // Animate the button press
   animatePress(userChoosenColor);
+
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 function checkAnswer(currentLevel){
@@ -63,12 +66,10 @@ function nextSequence() {
   gamePattern.push(randomChoosenColor);
 
   // Animate the selected color
-  $("#" + randomChoosenColor).fadeOut(100).fadeIn(100).fadeOut(100).FadeIn(100);
+  $("#" + randomChoosenColor).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 
   // Play the sound of the selected color
   playAudio(randomChoosenColor);
-
-  // Return the selected color
 }
 
 
